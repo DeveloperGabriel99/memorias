@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos - EternaMemória</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .font-serif-display { font-family: 'Playfair Display', serif; }
+        .cart-badge { position: absolute; top: -5px; right: -10px; }
+
+        /* Efeitos de Transição de Página */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-out {
+            animation: fadeOut 0.5s ease-in-out forwards;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200">
+
+    <!-- Cabeçalho -->
+    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold font-serif-display text-amber-400">EternaMemória</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="hover:text-amber-400 transition-colors">Início</a>
+                <a href="planos.html" class="hover:text-amber-400 transition-colors">Planos</a>
+                <a href="exemplos.html" class="hover:text-amber-400 transition-colors">Exemplos</a>
+                <a href="contato.html" class="hover:text-amber-400 transition-colors">Contato</a>
+            </div>
+            <div class="flex items-center">
+                 <a href="carrinho.html" class="relative mr-6">
+                    <i data-lucide="shopping-cart"></i>
+                    <span id="cart-count" class="cart-badge bg-amber-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="index.html" class="block hover:text-amber-400 transition-colors">Início</a>
+            <a href="planos.html" class="block hover:text-amber-400 transition-colors">Planos</a>
+            <a href="exemplos.html" class="block hover:text-amber-400 transition-colors">Exemplos</a>
+            <a href="contato.html" class="block hover:text-amber-400 transition-colors">Contato</a>
+        </div>
+    </header>
+
+    <main class="py-20">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl font-bold text-center mb-4 font-serif-display text-white">Nossos Planos</h1>
+            <p class="text-lg text-slate-400 text-center max-w-2xl mx-auto mb-16">Escolha o plano que melhor se adapta à sua homenagem.</p>
+
+            <!-- Layout dos planos corrigido para md:grid-cols-3 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Plano 1 -->
+                <div class="bg-slate-800 rounded-lg p-8 flex flex-col shadow-lg transition-transform transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-bold font-serif-display text-amber-400 mb-4">Reviva o Olhar</h3>
+                    <p class="text-4xl font-bold mb-6">R$ 99</p>
+                    <ul class="space-y-3 text-slate-300 mb-8 flex-grow">
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Animação com movimento facial</li>
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Expressões realistas</li>
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Entrega em vídeo (MP4) + GIF</li>
+                    </ul>
+                    <button onclick="addToCart('Reviva o Olhar', 99)" class="w-full mt-auto bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-3 px-6 rounded-lg transition-colors">Escolher este plano</button>
+                </div>
+
+                <!-- Plano 2 - Destaque -->
+                <div class="bg-slate-700 rounded-lg p-8 flex flex-col shadow-2xl transition-transform transform hover:-translate-y-2 ring-2 ring-amber-500 relative">
+                    <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-900 text-sm font-bold px-4 py-1 rounded-full">MAIS POPULAR</span>
+                    <h3 class="text-2xl font-bold font-serif-display text-amber-400 mb-4">Voz da Memória</h3>
+                    <p class="text-4xl font-bold mb-6">R$ 199</p>
+                    <ul class="space-y-3 text-slate-300 mb-8 flex-grow">
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Animação com movimento facial</li>
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Recriação da voz original</li>
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Sincronia labial com o áudio</li>
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Entrega em vídeo (MP4) + áudio (MP3)</li>
+                    </ul>
+                    <button onclick="addToCart('Voz da Memória', 199)" class="w-full mt-auto bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-3 px-6 rounded-lg transition-colors">Escolher este plano</button>
+                </div>
+
+                <!-- Plano 3 -->
+                <div class="bg-slate-800 rounded-lg p-8 flex flex-col shadow-lg transition-transform transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-bold font-serif-display text-amber-400 mb-4">Presença Completa</h3>
+                    <p class="text-4xl font-bold mb-6">R$ 299</p>
+                    <ul class="space-y-3 text-slate-300 mb-8 flex-grow">
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Todos os benefícios do plano "Voz"</li>
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Fundo com paisagem personalizada</li>
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Efeitos de ambiente (luz, sombra)</li>
+                        <li class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-2"></i>Entrega em vídeo com cenário</li>
+                    </ul>
+                    <button onclick="addToCart('Presença Completa', 299)" class="w-full mt-auto bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-3 px-6 rounded-lg transition-colors">Escolher este plano</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-8 mt-20">
+        <div class="container mx-auto px-6 text-center text-slate-400">
+            <p>&copy; 2024 EternaMemória. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Menu Mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Lógica do Carrinho
+        function addToCart(planName, planPrice) {
+            const plan = { name: planName, price: planPrice };
+            localStorage.setItem('eternaMemoriaCart', JSON.stringify([plan])); 
+            
+            // Anima a saída antes de navegar
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = 'carrinho.html';
+            }, 500);
+        }
+
+        // Atualiza a contagem do carrinho
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('eternaMemoriaCart')) || [];
+            const cartCountEl = document.getElementById('cart-count');
+            if (cart.length > 0) {
+                cartCountEl.textContent = cart.length;
+                cartCountEl.classList.remove('hidden');
+            } else {
+                cartCountEl.classList.add('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+
+            // Lógica da Transição de Página
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    const target = this.getAttribute('target');
+
+                    if (!href || href.startsWith('#') || target === '_blank' || href.startsWith('mailto:') || href.startsWith('tel:') || href.includes('//') || this.onclick) {
+                        return;
+                    }
+
+                    e.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location = href;
+                    }, 500);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

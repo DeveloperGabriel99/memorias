@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - EternaMemória</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .font-serif-display { font-family: 'Playfair Display', serif; }
+        .cart-badge { position: absolute; top: -5px; right: -10px; }
+
+        /* Efeitos de Transição de Página */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-out {
+            animation: fadeOut 0.5s ease-in-out forwards;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200">
+
+    <!-- Cabeçalho -->
+    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold font-serif-display text-amber-400">EternaMemória</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="hover:text-amber-400 transition-colors">Início</a>
+                <a href="planos.html" class="hover:text-amber-400 transition-colors">Planos</a>
+                <a href="exemplos.html" class="hover:text-amber-400 transition-colors">Exemplos</a>
+                <a href="contato.html" class="hover:text-amber-400 transition-colors">Contato</a>
+            </div>
+            <div class="flex items-center">
+                 <a href="carrinho.html" class="relative mr-6">
+                    <i data-lucide="shopping-cart"></i>
+                    <span id="cart-count" class="cart-badge bg-amber-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="index.html" class="block hover:text-amber-400 transition-colors">Início</a>
+            <a href="planos.html" class="block hover:text-amber-400 transition-colors">Planos</a>
+            <a href="exemplos.html" class="block hover:text-amber-400 transition-colors">Exemplos</a>
+            <a href="contato.html" class="block hover:text-amber-400 transition-colors">Contato</a>
+        </div>
+    </header>
+
+    <main class="py-20">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl font-bold text-center mb-4 font-serif-display text-white">Entre em Contato</h1>
+            <p class="text-lg text-slate-400 text-center max-w-2xl mx-auto mb-16">Tem alguma dúvida ou gostaria de um projeto especial? Fale conosco.</p>
+
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 bg-slate-800 p-8 rounded-lg shadow-lg">
+                <!-- Informações de Contato -->
+                <div class="flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold font-serif-display text-amber-400 mb-4">Nossos Canais</h2>
+                        <p class="text-slate-300 mb-6">Estamos disponíveis para conversar e tirar todas as suas dúvidas com o carinho e a atenção que sua memória merece.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <a href="https://api.whatsapp.com/send?phone=5511910787059&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20EternaMemória." target="_blank" class="flex items-center p-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors">
+                            <i data-lucide="whatsapp" class="w-6 h-6 text-green-500 mr-4"></i>
+                            <span>Converse pelo WhatsApp</span>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="flex items-center p-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors">
+                            <i data-lucide="instagram" class="w-6 h-6 text-pink-500 mr-4"></i>
+                            <span>Siga-nos no Instagram</span>
+                        </a>
+                        <a href="https://facebook.com" target="_blank" class="flex items-center p-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors">
+                            <i data-lucide="facebook" class="w-6 h-6 text-blue-500 mr-4"></i>
+                            <span>Curta nossa página no Facebook</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Formulário -->
+                <form>
+                    <div class="mb-4">
+                        <label for="name" class="block text-slate-300 mb-2">Nome</label>
+                        <input type="text" id="name" name="name" class="w-full bg-slate-700 border border-slate-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-shadow">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-slate-300 mb-2">E-mail</label>
+                        <input type="email" id="email" name="email" class="w-full bg-slate-700 border border-slate-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-shadow">
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-slate-300 mb-2">Mensagem</label>
+                        <textarea id="message" name="message" rows="5" class="w-full bg-slate-700 border border-slate-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-shadow"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-3 px-6 rounded-lg transition-colors">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-8 mt-20">
+        <div class="container mx-auto px-6 text-center text-slate-400">
+            <p>&copy; 2024 EternaMemória. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Menu Mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Atualiza a contagem do carrinho
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('eternaMemoriaCart')) || [];
+            const cartCountEl = document.getElementById('cart-count');
+            if (cart.length > 0) {
+                cartCountEl.textContent = cart.length;
+                cartCountEl.classList.remove('hidden');
+            } else {
+                cartCountEl.classList.add('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+
+            // Lógica da Transição de Página
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    const target = this.getAttribute('target');
+
+                    // Não animar links externos, âncoras, ou com protocolos especiais
+                    if (!href || href.startsWith('#') || target === '_blank' || href.startsWith('mailto:') || href.startsWith('tel:') || href.includes('//')) {
+                        return;
+                    }
+
+                    e.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location = href;
+                    }, 500); // Deve ser igual à duração da animação
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

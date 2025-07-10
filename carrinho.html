@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - EternaMemória</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .font-serif-display { font-family: 'Playfair Display', serif; }
+        .cart-badge { position: absolute; top: -5px; right: -10px; }
+
+        /* Efeitos de Transição de Página */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-out {
+            animation: fadeOut 0.5s ease-in-out forwards;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200">
+
+    <!-- Cabeçalho -->
+    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold font-serif-display text-amber-400">EternaMemória</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="hover:text-amber-400 transition-colors">Início</a>
+                <a href="planos.html" class="hover:text-amber-400 transition-colors">Planos</a>
+                <a href="exemplos.html" class="hover:text-amber-400 transition-colors">Exemplos</a>
+                <a href="contato.html" class="hover:text-amber-400 transition-colors">Contato</a>
+            </div>
+            <div class="flex items-center">
+                 <a href="carrinho.html" class="relative mr-6">
+                    <i data-lucide="shopping-cart"></i>
+                    <span id="cart-count" class="cart-badge bg-amber-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="index.html" class="block hover:text-amber-400 transition-colors">Início</a>
+            <a href="planos.html" class="block hover:text-amber-400 transition-colors">Planos</a>
+            <a href="exemplos.html" class="block hover:text-amber-400 transition-colors">Exemplos</a>
+            <a href="contato.html" class="block hover:text-amber-400 transition-colors">Contato</a>
+        </div>
+    </header>
+
+    <main class="py-20 min-h-screen">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl font-bold text-center mb-12 font-serif-display text-white">Meu Carrinho</h1>
+            
+            <div id="cart-container" class="max-w-2xl mx-auto bg-slate-800 rounded-lg shadow-lg p-8">
+                <!-- Itens do carrinho serão inseridos aqui dinamicamente -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-8">
+        <div class="container mx-auto px-6 text-center text-slate-400">
+            <p>&copy; 2024 EternaMemória. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Menu Mobile
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        const cartContainer = document.getElementById('cart-container');
+        const WHATSAPP_NUMBER = '5511910787059';
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('eternaMemoriaCart')) || [];
+            cartContainer.innerHTML = ''; // Limpa o conteúdo
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = `
+                    <p class="text-center text-slate-400">Seu carrinho está vazio.</p>
+                    <div class="text-center mt-6">
+                        <a href="planos.html" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-2 px-6 rounded-lg transition-colors">Ver Planos</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let total = 0;
+            const itemsHtml = cart.map((item, index) => {
+                total += item.price;
+                return `
+                    <div class="flex justify-between items-center border-b border-slate-700 pb-4 mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">${item.name}</h3>
+                            <p class="text-slate-400">Plano de Animação</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-semibold text-white">R$ ${item.price.toFixed(2)}</p>
+                            <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-400 text-sm">Remover</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const summaryHtml = `
+                <div class="mt-6 border-t border-slate-700 pt-6">
+                    <div class="flex justify-between items-center text-xl font-bold text-white">
+                        <span>Total</span>
+                        <span>R$ ${total.toFixed(2)}</span>
+                    </div>
+                    <button id="checkout-btn" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors mt-8 flex items-center justify-center">
+                        <i data-lucide="whatsapp" class="mr-2"></i> Finalizar via WhatsApp
+                    </button>
+                </div>
+            `;
+            
+            cartContainer.innerHTML = itemsHtml + summaryHtml;
+            lucide.createIcons(); 
+
+            // **LÓGICA DO BOTÃO DE CHECKOUT ATUALIZADA**
+            document.getElementById('checkout-btn').addEventListener('click', () => {
+                const planNames = cart.map(item => item.name).join(', ');
+                const message = `Olá! Escolhi o plano *${planNames}* no site EternaMemória. Gostaria de dar continuidade à criação. Aguardo instruções.`;
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            });
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('eternaMemoriaCart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('eternaMemoriaCart', JSON.stringify(cart));
+            renderCart();
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('eternaMemoriaCart')) || [];
+            const cartCountEl = document.getElementById('cart-count');
+            if (cart.length > 0) {
+                cartCountEl.textContent = cart.length;
+                cartCountEl.classList.remove('hidden');
+            } else {
+                cartCountEl.classList.add('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCart();
+            updateCartCount();
+
+            // Lógica da Transição de Página
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    const target = this.getAttribute('target');
+
+                    if (!href || href.startsWith('#') || target === '_blank' || href.startsWith('mailto:') || href.startsWith('tel:') || href.includes('//') || this.onclick) {
+                        return;
+                    }
+
+                    e.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location = href;
+                    }, 500);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
