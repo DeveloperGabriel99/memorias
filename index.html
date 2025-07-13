@@ -3,23 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EternaMemória - Dê vida à lembrança de quem você ama</title>
+    <title>StoryAlive - Recordar é viver.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Garamond:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body { 
-            font-family: 'Inter', sans-serif;
+            font-family: 'Garamond', serif;
+            background-color: #1a2a45; /* Cor de fallback caso o vídeo não carregue */
+            color: #f0e8d9;
             animation: fadeIn 0.5s ease-in-out;
         }
-        .font-serif-display { font-family: 'Playfair Display', serif; }
-        .hero-bg { background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 1)), url('https://placehold.co/1920x1080/1e293b/ffffff?text=Fundo+Abstrato') no-repeat center center; background-size: cover; }
+        
+        /* Estilos para o vídeo de fundo */
+        #video-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%; 
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            object-fit: cover; /* Garante que o vídeo cubra toda a tela */
+        }
+
+        /* Sobreposição para garantir a legibilidade do texto */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(26, 42, 69, 0.7), rgba(26, 42, 69, 0.95));
+            z-index: -99;
+        }
+
+        .font-serif-display { 
+            font-family: 'Garamond', serif; 
+            font-weight: 700;
+        }
+        
+        /* Removemos o fundo da classe hero, pois o vídeo e o overlay cuidam disso */
+        .hero-bg { 
+            background: transparent; 
+        }
+
         .cart-badge { position: absolute; top: -5px; right: -10px; }
 
-        /* Efeitos de Transição de Página */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -33,155 +67,160 @@
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-200">
+<body class="text-[#f0e8d9]">
 
-    <!-- Cabeçalho -->
-    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold font-serif-display text-amber-400">EternaMemória</a>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="hover:text-amber-400 transition-colors">Início</a>
-                <a href="planos.html" class="hover:text-amber-400 transition-colors">Planos</a>
-                <a href="exemplos.html" class="hover:text-amber-400 transition-colors">Exemplos</a>
-                <a href="contato.html" class="hover:text-amber-400 transition-colors">Contato</a>
-            </div>
-            <div class="flex items-center">
-                 <a href="carrinho.html" class="relative mr-6">
-                    <i data-lucide="shopping-cart"></i>
-                    <span id="cart-count" class="cart-badge bg-amber-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
-                </a>
-                <button id="mobile-menu-button" class="md:hidden">
-                    <i data-lucide="menu"></i>
-                </button>
-            </div>
-        </nav>
-        <!-- Menu Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
-            <a href="index.html" class="block hover:text-amber-400 transition-colors">Início</a>
-            <a href="planos.html" class="block hover:text-amber-400 transition-colors">Planos</a>
-            <a href="exemplos.html" class="block hover:text-amber-400 transition-colors">Exemplos</a>
-            <a href="contato.html" class="block hover:text-amber-400 transition-colors">Contato</a>
-        </div>
-    </header>
+    <!-- Vídeo de Fundo -->
+    <!-- O arquivo video.mp4 deve estar na mesma pasta que o index.html -->
+    <video autoplay muted loop id="video-bg">
+        <source src="video.mp4" type="video/mp4">
+        Seu navegador não suporta a tag de vídeo.
+    </video>
+    <div class="video-overlay"></div>
 
-    <main>
-        <!-- Seção Hero -->
-        <section id="hero" class="hero-bg min-h-screen flex items-center">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold font-serif-display text-white mb-4 reveal-up">Dê vida à lembrança de quem você ama.</h1>
-                <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-8 reveal-up" data-sr-delay="200">Transformamos fotos antigas em memórias vivas, recriando movimentos e a voz de seus entes queridos com a magia da inteligência artificial.</p>
-                <a href="planos.html" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-3 px-8 rounded-full transition-transform hover:scale-105 inline-block reveal-up" data-sr-delay="400">
-                    Escolher um Plano
-                </a>
-            </div>
-        </section>
-
-        <!-- Seção Como Funciona (Cor de fundo atualizada) -->
-        <section id="como-funciona" class="py-20 bg-slate-900">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-12 font-serif-display reveal-down">Como Funciona?</h2>
-                <div class="grid md:grid-cols-3 gap-12 text-center">
-                    <div class="reveal-up">
-                        <div class="bg-slate-700 rounded-full w-24 h-24 mx-auto flex items-center justify-center mb-4">
-                            <i data-lucide="upload-cloud" class="w-12 h-12 text-amber-400"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">1. Envie a Foto</h3>
-                        <p class="text-slate-400">Você nos envia a foto do seu ente querido e, se desejar, um áudio para recriarmos a voz.</p>
-                    </div>
-                    <div class="reveal-up" data-sr-delay="200">
-                        <div class="bg-slate-700 rounded-full w-24 h-24 mx-auto flex items-center justify-center mb-4">
-                            <i data-lucide="sparkles" class="w-12 h-12 text-amber-400"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">2. A Magia Acontece</h3>
-                        <p class="text-slate-400">Nossa IA analisa a imagem e o áudio para criar uma animação facial realista e emocionante.</p>
-                    </div>
-                    <div class="reveal-up" data-sr-delay="400">
-                        <div class="bg-slate-700 rounded-full w-24 h-24 mx-auto flex items-center justify-center mb-4">
-                            <i data-lucide="send" class="w-12 h-12 text-amber-400"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">3. Receba a Memória</h3>
-                        <p class="text-slate-400">Entregamos um vídeo de alta qualidade para você guardar e compartilhar essa lembrança eterna.</p>
-                    </div>
+    <!-- Conteúdo do site (precisa ter z-index maior que o vídeo) -->
+    <div class="relative z-10">
+        <!-- Cabeçalho -->
+        <header class="bg-transparent backdrop-blur-sm sticky top-0">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="index.html" class="text-3xl font-bold font-serif-display text-amber-400">StoryAlive</a>
+                <div class="hidden md:flex items-center space-x-8 text-lg">
+                    <a href="index.html" class="hover:text-amber-400 transition-colors">Início</a>
+                    <a href="planos.html" class="hover:text-amber-400 transition-colors">Planos</a>
+                    <a href="exemplos.html" class="hover:text-amber-400 transition-colors">Exemplos</a>
+                    <a href="contato.html" class="hover:text-amber-400 transition-colors">Contato</a>
                 </div>
+                <div class="flex items-center">
+                     <a href="carrinho.html" class="relative mr-6">
+                        <i data-lucide="shopping-cart"></i>
+                        <span id="cart-count" class="cart-badge bg-amber-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                    <button id="mobile-menu-button" class="md:hidden">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </nav>
+            <!-- Menu Mobile -->
+            <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 bg-[#1a2a45]/90 rounded-b-lg">
+                <a href="index.html" class="block hover:text-amber-400 transition-colors">Início</a>
+                <a href="planos.html" class="block hover:text-amber-400 transition-colors">Planos</a>
+                <a href="exemplos.html" class="block hover:text-amber-400 transition-colors">Exemplos</a>
+                <a href="contato.html" class="block hover:text-amber-400 transition-colors">Contato</a>
             </div>
-        </section>
+        </header>
 
-        <!-- Seção de Exemplos -->
-        <section class="py-20 bg-slate-800">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-12 font-serif-display reveal-down">Veja a Emoção em Movimento</h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bg-slate-700 rounded-lg overflow-hidden shadow-lg reveal-left">
-                        <img src="https://placehold.co/600x400/334155/eab308?text=Exemplo+de+Animação" alt="Exemplo de foto animada" class="w-full h-auto">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2">Animação Facial</h3>
-                            <p class="text-slate-400">Veja como um simples sorriso pode ser trazido de volta à vida.</p>
+        <main>
+            <!-- Seção Hero -->
+            <section id="hero" class="hero-bg min-h-screen flex items-center">
+                <div class="container mx-auto px-6 text-center">
+                    <h1 class="text-5xl md:text-7xl font-bold font-serif-display text-white mb-4 reveal-up">Recordar é viver.</h1>
+                    <p class="text-xl md:text-2xl text-[#f0e8d9] max-w-3xl mx-auto mb-8 reveal-up" data-sr-delay="200">Mais que uma foto, a essência de uma vida. Recriamos a alma de seus retratos com expressões realistas, a voz original e cenários cheios de significado.</p>
+                    <a href="planos.html" class="bg-amber-500 hover:bg-amber-600 text-[#1a2a45] font-bold py-3 px-8 rounded-full transition-transform hover:scale-105 inline-block reveal-up text-lg" data-sr-delay="400">
+                        Conheça os Planos
+                    </a>
+                </div>
+            </section>
+
+            <!-- Seção Como Funciona -->
+            <section id="como-funciona" class="py-20 bg-transparent">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-4xl font-bold text-center mb-12 font-serif-display reveal-down">Como a Magia Acontece?</h2>
+                    <div class="grid md:grid-cols-3 gap-12 text-center">
+                        <div class="reveal-up">
+                            <div class="bg-[#283e51]/50 rounded-full w-24 h-24 mx-auto flex items-center justify-center mb-4 border border-amber-500/20">
+                                <i data-lucide="scroll" class="w-12 h-12 text-amber-400"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2 font-serif-display">1. Envie o Retrato</h3>
+                            <p class="text-lg text-[#d1c8b9]">Você nos envia a foto e, opcionalmente, uma gravação de voz para a homenagem.</p>
                         </div>
-                    </div>
-                    <div class="bg-slate-700 rounded-lg overflow-hidden shadow-lg reveal-right">
-                         <img src="https://placehold.co/600x400/334155/eab308?text=Exemplo+com+Voz" alt="Exemplo de foto animada com voz" class="w-full h-auto">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2">Recriação de Voz</h3>
-                            <p class="text-slate-400">Ouça novamente uma mensagem especial com a voz da pessoa amada.</p>
+                        <div class="reveal-up" data-sr-delay="200">
+                            <div class="bg-[#283e51]/50 rounded-full w-24 h-24 mx-auto flex items-center justify-center mb-4 border border-amber-500/20">
+                                <i data-lucide="sparkles" class="w-12 h-12 text-amber-400"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2 font-serif-display">2. A Alquimia Digital</h3>
+                            <p class="text-lg text-[#d1c8b9]">Nossa tecnologia infunde a imagem com movimento e som, criando uma memória viva.</p>
+                        </div>
+                        <div class="reveal-up" data-sr-delay="400">
+                            <div class="bg-[#283e51]/50 rounded-full w-24 h-24 mx-auto flex items-center justify-center mb-4 border border-amber-500/20">
+                                <i data-lucide="gift" class="w-12 h-12 text-amber-400"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2 font-serif-display">3. Receba a Preciosidade</h3>
+                            <p class="text-lg text-[#d1c8b9]">Entregamos um vídeo eterno para você guardar e compartilhar essa lembrança única.</p>
                         </div>
                     </div>
                 </div>
-                 <div class="text-center mt-12 reveal-up">
-                    <a href="exemplos.html" class="text-amber-400 hover:text-amber-500 font-semibold">Ver mais exemplos <i data-lucide="arrow-right" class="inline-block w-4 h-4"></i></a>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Seção de Depoimentos -->
-        <section class="py-20 bg-slate-900">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-12 font-serif-display reveal-down">O que nossos clientes dizem</h2>
-                <div class="max-w-3xl mx-auto text-center reveal-up">
-                    <div class="bg-slate-800 p-8 rounded-xl shadow-lg">
-                        <p class="text-slate-300 italic text-lg">"Não tenho palavras para descrever a emoção de ver o sorriso do meu pai novamente. Foi como se ele estivesse aqui comigo por um instante. Um trabalho incrível e muito sensível. Obrigada, EternaMemória."</p>
-                        <p class="font-bold text-amber-400 mt-4">- Maria S.</p>
+            <!-- Seção de Exemplos -->
+            <section id="exemplos" class="py-20 bg-transparent">
+                <div class="container mx-auto px-6 bg-[#283e51]/50 backdrop-blur-sm p-8 rounded-lg border border-amber-500/10">
+                    <h2 class="text-4xl font-bold text-center mb-12 font-serif-display reveal-down">Fragmentos de Memória</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-[#1a2a45]/70 rounded-lg overflow-hidden shadow-lg reveal-left border border-amber-500/20">
+                            <img src="https://placehold.co/600x400/1a2a45/eab308?text=Retrato+Animado" alt="Exemplo de foto animada" class="w-full h-auto">
+                            <div class="p-6">
+                                <h3 class="font-bold text-2xl mb-2 font-serif-display text-amber-400">O Sorriso Revivido</h3>
+                                <p class="text-[#d1c8b9] text-lg">Veja como um simples retrato em preto e branco pode voltar a sorrir.</p>
+                            </div>
+                        </div>
+                        <div class="bg-[#1a2a45]/70 rounded-lg overflow-hidden shadow-lg reveal-right border border-amber-500/20">
+                             <img src="https://placehold.co/600x400/1a2a45/eab308?text=Retrato+com+Voz" alt="Exemplo de foto animada com voz" class="w-full h-auto">
+                            <div class="p-6">
+                                <h3 class="font-bold text-2xl mb-2 font-serif-display text-amber-400">O Eco da Voz</h3>
+                                <p class="text-[#d1c8b9] text-lg">Ouça novamente uma mensagem especial com a voz da pessoa amada.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="text-center mt-12 reveal-up">
+                        <a href="exemplos.html" class="text-amber-400 hover:text-amber-500 font-semibold text-lg">Ver galeria completa <i data-lucide="arrow-right" class="inline-block w-5 h-5"></i></a>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-    </main>
+            <!-- Seção de Depoimentos -->
+            <section id="depoimentos" class="py-20 bg-transparent">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-4xl font-bold text-center mb-12 font-serif-display reveal-down">Relatos de Coração</h2>
+                    <div class="max-w-3xl mx-auto text-center reveal-up">
+                        <div class="bg-[#283e51]/50 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-amber-500/20">
+                            <p class="text-[#d1c8b9] italic text-xl">"Não tenho palavras para descrever a emoção de ver o sorriso do meu pai novamente. Foi como se ele estivesse aqui comigo por um instante. Um trabalho incrível e muito sensível. Obrigada, StoryAlive."</p>
+                            <p class="font-bold text-amber-400 mt-4 text-lg">- Maria S.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-    <!-- Rodapé -->
-    <footer class="bg-slate-900 border-t border-slate-800 py-8">
-        <div class="container mx-auto px-6 text-center text-slate-400">
-            <p>&copy; 2024 EternaMemória. Todos os direitos reservados.</p>
-            <div class="flex justify-center space-x-6 mt-4">
-                <a href="#" class="hover:text-white">Política de Privacidade</a>
-                <a href="#" class="hover:text-white">Termos de Uso</a>
+        <!-- Rodapé -->
+        <footer class="bg-transparent border-t border-amber-500/10 py-8">
+            <div class="container mx-auto px-6 text-center text-[#d1c8b9]">
+                <p>&copy; 2024 StoryAlive. Todos os direitos reservados.</p>
+                <div class="flex justify-center space-x-6 mt-4">
+                    <a href="#" class="hover:text-white">Política de Privacidade</a>
+                    <a href="#" class="hover:text-white">Termos de Uso</a>
+                </div>
+                <div class="flex justify-center space-x-6 mt-4">
+                    <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                </div>
             </div>
-            <div class="flex justify-center space-x-6 mt-4">
-                <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
-                <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <script>
-        // Inicializa os ícones
         lucide.createIcons();
+        ScrollReveal().reveal('.reveal-up', { origin: 'bottom', distance: '30px', duration: 800, delay: 100, easing: 'ease-in-out' });
+        ScrollReveal().reveal('.reveal-down', { origin: 'top', distance: '30px', duration: 800, delay: 100, easing: 'ease-in-out' });
+        ScrollReveal().reveal('.reveal-left', { origin: 'left', distance: '30px', duration: 800, delay: 100, easing: 'ease-in-out' });
+        ScrollReveal().reveal('.reveal-right', { origin: 'right', distance: '30px', duration: 800, delay: 100, easing: 'ease-in-out' });
 
-        // Animações de Scroll
-        ScrollReveal().reveal('.reveal-up', { origin: 'bottom', distance: '20px', duration: 800, delay: 100, easing: 'ease-in-out' });
-        ScrollReveal().reveal('.reveal-down', { origin: 'top', distance: '20px', duration: 800, delay: 100, easing: 'ease-in-out' });
-        ScrollReveal().reveal('.reveal-left', { origin: 'left', distance: '20px', duration: 800, delay: 100, easing: 'ease-in-out' });
-        ScrollReveal().reveal('.reveal-right', { origin: 'right', distance: '20px', duration: 800, delay: 100, easing: 'ease-in-out' });
-
-        // Menu Mobile
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
         
-        // Atualiza a contagem do carrinho
         function updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('eternaMemoriaCart')) || [];
+            const cart = JSON.parse(localStorage.getItem('storyAliveCart')) || [];
             const cartCountEl = document.getElementById('cart-count');
             if (cart.length > 0) {
                 cartCountEl.textContent = cart.length;
@@ -194,7 +233,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             updateCartCount();
 
-            // Lógica da Transição de Página
             document.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');
